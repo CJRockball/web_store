@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import List, Optional
 from enum import Enum
+import re
 
 
 class FoodCategory(str, Enum):
@@ -12,11 +13,12 @@ class FoodItem(BaseModel):
     name: str = Field(..., min_length=1, max_length=50)
     price: int = Field(..., gt=0, description="Price must be positive")
     category: FoodCategory
-    image: str = Field(..., pattern=r".*\.(jpg|png|gif)$")
+    image: str = Field(..., pattern=r".*\.(jpg|png|gif)$")  # Fixed: use 'pattern' instead of 'regex'
     description: Optional[str] = Field(None, max_length=200)
-
-    @validator('name')
-    def name_must_be_alphanumeric_with_spaces(cls, v):
+    
+    @field_validator('name')  # Fixed: use @field_validator instead of @validator
+    @classmethod
+    def name_must_be_alphanumeric_with_spaces(cls, v: str) -> str:
         if not v.replace(' ', '').isalnum():
             raise ValueError('Name must contain only alphanumeric characters and spaces')
         return v.title()
@@ -33,8 +35,9 @@ class Cart(BaseModel):
     items: List[CartItem] = []
     total_cost: int = 0
     item_count: int = 0
-
+    
     def add_item(self, food_item: FoodItem) -> None:
+        """Add a FoodItem to the cart, handling quantity if item already exists"""
         # Check if item already exists in cart
         for cart_item in self.items:
             if cart_item.name == food_item.name:
@@ -42,7 +45,7 @@ class Cart(BaseModel):
                 self.total_cost += food_item.price
                 self.item_count += 1
                 return
-
+        
         # Add new item
         new_cart_item = CartItem(
             name=food_item.name,
@@ -52,8 +55,9 @@ class Cart(BaseModel):
         self.items.append(new_cart_item)
         self.total_cost += food_item.price
         self.item_count += 1
-
+    
     def remove_item(self, item_name: str) -> bool:
+        """Remove an item from the cart completely"""
         for i, cart_item in enumerate(self.items):
             if cart_item.name == item_name:
                 self.total_cost -= cart_item.price * cart_item.quantity
@@ -61,8 +65,9 @@ class Cart(BaseModel):
                 del self.items[i]
                 return True
         return False
-
+    
     def clear(self) -> None:
+        """Clear all items from the cart"""
         self.items = []
         self.total_cost = 0
         self.item_count = 0

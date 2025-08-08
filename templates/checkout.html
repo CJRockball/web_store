@@ -3,332 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Kids Web Store</title>
+    <title>🛒 Checkout - My Food Basket! 🛒</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Comic Sans MS', cursive, Arial, sans-serif;
+            background: linear-gradient(135deg, #D8B5D8 0%, #A8C4E8 50%, #88D688 100%);
             min-height: 100vh;
-            color: #333;
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        
+        .checkout-container {
+            display: flex;
+            min-height: 100vh;
+            width: 100vw;
+        }
+        
+        /* LEFT SIDE - INDIVIDUAL ITEMS (70%) */
+        .items-section {
+            width: 70%;
             padding: 20px;
+            background: linear-gradient(135deg, #D8B5D8, #A8C4E8);
+            border-right: 8px solid #000;
         }
-
+        
         .header {
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .header h1 {
-            color: #4a5568;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .cart-summary {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 6px solid #000;
         }
-
-        .cart-summary h2 {
-            color: #2d3748;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
+        
+        .header h1 {
+            color: #000;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px #E0D68C;
         }
-
-        .cart-items {
+        
+        .items-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
-            margin-bottom: 30px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding-right: 10px;
         }
-
-        .cart-item {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
+        
+        /* BIGGER SQUARE PICTURE LEFT, CONTENT RIGHT, BUTTON BELOW */
+        .checkout-item {
+            background: linear-gradient(135deg, #E0D68C, #D8B5D8);
+            border-radius: 15px;
+            padding: 15px;
+            border: 4px solid #000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-top {
             display: flex;
             align-items: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #4299e1;
+            margin-bottom: 12px;
         }
-
-        .cart-item img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        
+        .checkout-item img {
+            width: 85px;
+            height: 85px;
+            border-radius: 12px;
             object-fit: cover;
-            margin-right: 20px;
-            border: 2px solid #f7fafc;
+            margin-right: 15px;
+            border: 3px solid #000;
+            flex-shrink: 0;
         }
-
+        
         .item-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             flex-grow: 1;
         }
-
-        .item-info h3 {
-            color: #2d3748;
-            margin-bottom: 5px;
+        
+        .item-details h3 {
+            color: #000;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 0px #A8C4E8;
+        }
+        
+        .item-details .unit-price {
+            color: #000;
             font-size: 1.2rem;
-        }
-
-        .item-quantity {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        .item-price {
-            color: #4299e1;
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-left: 20px;
+            background: #88D688;
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 2px solid #000;
         }
-
+        
         .remove-btn {
-            background: #e53e3e;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
-
-        .remove-btn:hover {
-            background: #c53030;
-        }
-
-        .total-section {
-            background: #4299e1;
-            color: white;
-            padding: 20px;
+            background: linear-gradient(135deg, #D8B5D8, #E0D68C);
+            color: #000;
+            border: 3px solid #000;
+            padding: 8px 15px;
             border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+            min-height: 40px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #E0D68C, #D8B5D8);
+            transform: scale(1.02);
+        }
+        
+        /* RIGHT SIDE - TOTAL & ACTIONS (30%) */
+        .payment-section {
+            width: 30%;
+            background: linear-gradient(135deg, #88D688, #E0D68C);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .total-display {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
+            border: 6px solid #000;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
-
-        .total-section h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .total-amount {
+        
+        .total-display h2 {
+            color: #000;
             font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #E0D68C;
+        }
+        
+        .grand-total {
+            color: #000;
+            font-size: 5rem;
             font-weight: bold;
+            text-shadow: 4px 4px 0px #D8B5D8;
+            background: linear-gradient(135deg, #88D688, #A8C4E8);
+            padding: 25px;
+            border-radius: 20px;
+            border: 6px solid #000;
+            margin: 20px 0;
         }
-
-        .actions {
+        
+        .action-buttons {
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
         }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
+        
+        .action-btn {
+            background: linear-gradient(135deg, #A8C4E8, #D8B5D8);
+            color: #000;
+            border: 4px solid #000;
+            padding: 20px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.8rem;
+            transition: transform 0.2s ease;
+            font-family: 'Comic Sans MS', cursive;
+            text-shadow: 1px 1px 0px #E0D68C;
+            min-height: 70px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #88D688, #E0D68C);
+            font-size: 2rem;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #A8C4E8, #D8B5D8);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #D8B5D8, #E0D68C);
+        }
+        
+        .action-btn:hover, .action-btn:active {
+            transform: scale(1.03);
+        }
+        
+        .action-btn:active {
+            transform: scale(0.97);
+        }
+        
+        .empty-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        .empty-message {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 60px 40px;
+            border: 8px solid #000;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .empty-message h2 {
+            color: #000;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 0px #E0D68C;
+        }
+        
+        .empty-message p {
+            color: #000;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, #88D688, #A8C4E8);
+            color: #000;
+            border: 6px solid #000;
+            padding: 25px 40px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            font-size: 2.2rem;
             text-decoration: none;
             display: inline-block;
-            text-align: center;
-            min-width: 140px;
+            font-family: 'Comic Sans MS', cursive;
         }
-
-        .btn-primary {
-            background: #38a169;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2f855a;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #718096;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #4a5568;
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: #e53e3e;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #c53030;
-            transform: translateY(-2px);
-        }
-
-        .empty-cart {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 60px 30px;
-            color: #718096;
-        }
-
-        .empty-cart h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .empty-cart p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
+        
         .message, .error {
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 15px;
             margin: 20px 0;
             text-align: center;
             font-weight: bold;
+            font-size: 1.6rem;
+            border: 4px solid #000;
         }
-
+        
         .message {
-            background: #c6f6d5;
-            color: #22543d;
-            border: 1px solid #9ae6b4;
+            background: linear-gradient(135deg, #88D688, #E0D68C);
+            color: #000;
         }
-
+        
         .error {
-            background: #fed7d7;
-            color: #742a2a;
-            border: 1px solid #fc8181;
+            background: linear-gradient(135deg, #D8B5D8, #E0D68C);
+            color: #000;
         }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .cart-item {
+        
+        /* Mobile responsive */
+        @media (max-width: 1024px) {
+            .checkout-container {
                 flex-direction: column;
-                text-align: center;
             }
-
-            .cart-item img {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-
-            .actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
+            
+            .items-section, .payment-section {
                 width: 100%;
-                max-width: 300px;
+            }
+            
+            .items-grid {
+                max-height: none;
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .grand-total {
+                font-size: 4rem;
+            }
+            
+            .checkout-item img {
+                width: 70px;
+                height: 70px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🛒 Checkout</h1>
-            <p>Review your items and complete your order</p>
-        </div>
+    {% if cart.items %}
+    <div class="checkout-container">
+        <!-- LEFT SIDE - INDIVIDUAL ITEMS (70%) -->
+        <div class="items-section">
+            <div class="header">
+                <h1>🛒 YOUR YUMMY FOODS! 🛒</h1>
+                <p style="font-size: 1.6rem; color: #000;">Every food you picked!</p>
+            </div>
 
-        {% if message %}
-        <div class="message">{{ message }}</div>
-        {% endif %}
+            {% if message %}
+            <div class="message">🎉 {{ message }} 🎉</div>
+            {% endif %}
 
-        {% if error %}
-        <div class="error">{{ error }}</div>
-        {% endif %}
+            {% if error %}
+            <div class="error">😟 {{ error }} 😟</div>
+            {% endif %}
 
-        {% if cart.items %}
-        <div class="cart-summary">
-            <h2>Your Order</h2>
-            <div class="cart-items">
+            <div class="items-grid">
+                <!-- Bigger square picture left, name/price on right same line, remove button below -->
                 {% for item in cart.items %}
-                <div class="cart-item">
-                    <img src="/static/{{ item.image }}" alt="{{ item.name }}">
-                    <div class="item-info">
-                        <h3>{{ item.name }}</h3>
-                        <div class="item-quantity">Quantity: {{ item.quantity }}</div>
+                    {% for i in range(item.quantity) %}
+                    <div class="checkout-item">
+                        <div class="item-top">
+                            <img src="/static/{{ item.image }}" alt="{{ item.name }}">
+                            <div class="item-info">
+                                <div class="item-details">
+                                    <h3>{{ item.name }}</h3>
+                                </div>
+                                <div class="unit-price">${{ item.price }}</div>
+                            </div>
+                        </div>
+                        <form method="post" action="/checkout/remove-item">
+                            <input type="hidden" name="item_name" value="{{ item.name }}">
+                            <button type="submit" class="remove-btn" onclick="playSound()">
+                                REMOVE THIS ITEM
+                            </button>
+                        </form>
                     </div>
-                    <div class="item-price">${{ item.price * item.quantity }}</div>
-                    <form method="post" action="/checkout/remove-item" style="display: inline;">
-                        <input type="hidden" name="item_name" value="{{ item.name }}">
-                        <button type="submit" class="remove-btn">Remove</button>
-                    </form>
-                </div>
+                    {% endfor %}
                 {% endfor %}
             </div>
         </div>
 
-        <div class="total-section">
-            <h2>Total Amount</h2>
-            <div class="total-amount">${{ cart.total_cost }}</div>
-            <p>{{ cart.item_count }} item{% if cart.item_count != 1 %}s{% endif %}</p>
+        <!-- RIGHT SIDE - TOTAL & ACTIONS (30%) -->
+        <div class="payment-section">
+            <div class="total-display">
+                <h2>TOTAL COST:</h2>
+                <div class="grand-total">${{ cart.total_cost }}</div>
+            </div>
+
+            <div class="action-buttons">
+                <form method="post" action="/checkout/">
+                    <input type="hidden" name="action" value="Checkout">
+                    <button type="submit" class="action-btn btn-primary" onclick="playSound()">
+                        💳 BUY ALL FOODS!
+                    </button>
+                </form>
+                
+                <form method="post" action="/checkout/">
+                    <input type="hidden" name="action" value="Return">
+                    <button type="submit" class="action-btn btn-secondary" onclick="playSound()">
+                        ← GET MORE FOODS
+                    </button>
+                </form>
+                
+                <form method="post" action="/checkout/">
+                    <input type="hidden" name="action" value="Reset">
+                    <button type="submit" class="action-btn btn-danger" onclick="playSound()">
+                        🗑️ EMPTY BASKET
+                    </button>
+                </form>
+            </div>
         </div>
+    </div>
 
-        <div class="actions">
-            <form method="post" action="/checkout/" style="display: inline;">
-                <input type="hidden" name="action" value="Checkout">
-                <button type="submit" class="btn btn-primary">
-                    💳 Complete Order
-                </button>
-            </form>
-
-            <form method="post" action="/checkout/" style="display: inline;">
-                <input type="hidden" name="action" value="Return">
-                <button type="submit" class="btn btn-secondary">
-                    ← Back to Store
-                </button>
-            </form>
-
-            <form method="post" action="/checkout/" style="display: inline;">
-                <input type="hidden" name="action" value="Reset">
-                <button type="submit" class="btn btn-danger">
-                    🗑️ Clear Cart
-                </button>
-            </form>
-        </div>
-
-        {% else %}
-        <div class="empty-cart">
-            <h2>🛒 Your cart is empty!</h2>
-            <p>Add some delicious items to get started</p>
-            <a href="/store/" class="btn btn-primary">
-                🍎 Start Shopping
+    {% else %}
+    <div class="empty-checkout">
+        <div class="empty-message">
+            <h2>🛒 YOUR BASKET IS EMPTY! 🛒</h2>
+            <p>Let's go get some yummy foods!</p>
+            <a href="/store/" class="back-btn">
+                🍎 GET YUMMY FOODS! 🍕
             </a>
         </div>
-        {% endif %}
     </div>
+    {% endif %}
+
+    <!-- Audio feedback script -->
+    <script>
+        function playSound() {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 600;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.3);
+        }
+    </script>
 </body>
 </html>
