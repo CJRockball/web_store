@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Kids Web Store</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        .error-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+        }
+        h1 { color: #e53e3e; font-size: 2.5rem; margin-bottom: 20px; }
+        .error-message { background: #fed7d7; color: #742a2a; padding: 20px; border-radius: 10px; 
+                        margin: 20px 0; border: 1px solid #fc8181; }
+        .btn { background: #4299e1; color: white; border: none; padding: 15px 30px;
+               border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 1.1rem;
+               transition: all 0.3s ease; text-decoration: none; display: inline-block; margin: 10px; }
+        .btn:hover { background: #3182ce; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>😞 Oops!</h1>
+        <p style="font-size: 1.2rem; color: #718096; margin-bottom: 20px;">
+            Something went wrong, but don't worry!
+        </p>
+
+        <div class="error-message">
+            {{ error }}
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="/store/" class="btn">🛒 Back to Store</a>
+            <a href="/" class="btn" style="background: #718096;">🏠 Home</a>
+        </div>
+
+        <div style="margin-top: 30px; font-size: 0.9rem; color: #718096;">
+            <p>If this problem continues, please let an adult know! 👨‍👩‍👧‍👦</p>
+        </div>
+    </div>
+</body>
+</html>

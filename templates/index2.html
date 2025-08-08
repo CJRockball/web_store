@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html land="en-us">
+<head>
+    <meta charset="'UTF-8"
+</head>
+
+<body>
+    <br>
+    <form method="post">
+        <input type="image" src="{{ url_for('static', path= 'carrot.jpg') }}" name='Carrot' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'tomato.jpg') }}" name='Tomato' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'corn.jpg'  ) }}" name='Corn' alt="Submit" width="200" height="200" />
+        <br>
+        <input type="image" src="{{ url_for('static', path= 'hotdog.jpg') }}" name='Hotdog' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'pizza.jpg') }}" name='Pizza' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'icecream.jpg') }}" name='Icecream' alt="Submit" width="200" height="200" />
+        <br>
+        <input type="image" src="{{ url_for('static', path= 'cookie.jpg') }}" name='Cookie' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'chocolate.jpg') }}" name='Chocolate' alt="Submit" width="200" height="200" />
+        <input type="image" src="{{ url_for('static', path= 'tea.jpg') }}" name='Tea' alt="Submit" width="200" height="200" />
+        
+        <p style="font-size:80px; color:blue"> Ordered items: {{ oitem }} </p>
+
+        <input button style="background-color: #04AA6D; border: none; color: white;height:50px;width:100px;font-size: 18px;" type="submit" name="action" value="Done">
+
+    </form>
+
+
+
+
+</body>
+
+
+
+</html>

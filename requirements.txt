@@ -1,0 +1,14 @@
+fastapi==0.111
+itsdangerous>=2.1        # needed by SessionMiddleware
+uvicorn[standard]==0.24.0
+jinja2==3.1.2
+python-multipart==0.0.6
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+pydantic-settings==2.0.3
+starlette==0.27.0
+nh3==0.2.14
+pytest==7.4.3
+httpx==0.25.2
+fastapi-limiter==0.1.5
+redis==5.0.1
